@@ -2,141 +2,94 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sayıyı Bil</title>
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      -webkit-tap-highlight-color: transparent;
+      font-family: Arial, sans-serif;
     }
 
     body {
-      background: #000;
+      background: black;
       color: white;
       min-height: 100vh;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       padding: 20px;
     }
 
     .wrapper {
       display: flex;
-      gap: 24px;
+      gap: 20px;
       width: 100%;
-      max-width: 950px;
-      align-items: flex-start;
-      justify-content: center;
+      max-width: 900px;
       flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
     }
 
-    .container {
-      text-align: center;
-      width: 100%;
-      max-width: 420px;
+    .game {
       flex: 1;
       min-width: 280px;
-    }
-
-    .side-panel {
-      width: 220px;
-      background: #0d0d0d;
-      border: 1px solid #222;
-      border-radius: 16px;
-      padding: 18px;
-      min-height: 260px;
-    }
-
-    .side-title {
-      font-size: 20px;
-      color: #ccc;
-      margin-bottom: 14px;
-      text-align: center;
-    }
-
-    .top-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      font-size: 18px;
-      color: #aaa;
-    }
-
-    .top-list li {
-      background: #151515;
-      border-radius: 10px;
-      padding: 10px 12px;
+      max-width: 420px;
       text-align: center;
     }
 
     .title {
       font-size: 52px;
-      font-weight: bold;
       color: gray;
-      margin-bottom: 12px;
-      line-height: 1.1;
+      font-weight: bold;
+      margin-bottom: 10px;
     }
 
     .streaks {
       font-size: 15px;
       color: #bbb;
-      margin-bottom: 28px;
-      line-height: 1.9;
+      line-height: 1.8;
+      margin-bottom: 25px;
     }
 
-    .input-group {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      align-items: center;
-      margin-bottom: 24px;
-    }
-
-    input[type="text"] {
-      width: 100%;
-      max-width: 260px;
-      padding: 18px;
-      font-size: 24px;
-      border: 2px solid #444;
-      border-radius: 14px;
-      background: #111;
-      color: white;
-      text-align: center;
-      outline: none;
-      -webkit-appearance: none;
-      appearance: none;
-    }
-
-    input[type="text"]:focus {
-      border-color: #888;
-      box-shadow: 0 0 10px rgba(255,255,255,0.08);
-    }
-
-    button {
+    .inputBox {
       width: 100%;
       max-width: 260px;
       padding: 16px;
+      font-size: 24px;
+      text-align: center;
+      border: 2px solid #444;
+      border-radius: 12px;
+      background: #111;
+      color: white;
+      outline: none;
+      margin-bottom: 12px;
+    }
+
+    .inputBox:focus {
+      border-color: #888;
+    }
+
+    .btn {
+      width: 100%;
+      max-width: 260px;
+      padding: 14px;
       font-size: 20px;
       font-weight: bold;
       border: none;
-      border-radius: 14px;
+      border-radius: 12px;
       background: #222;
       color: white;
       cursor: pointer;
-      transition: 0.2s ease;
+      margin-bottom: 20px;
     }
 
-    button:active {
+    .btn:active {
       transform: scale(0.98);
-      background: #333;
     }
 
     .result {
-      margin-top: 18px;
       font-size: 28px;
       font-weight: bold;
       min-height: 40px;
@@ -151,17 +104,40 @@
     }
 
     .info {
-      margin-top: 12px;
-      font-size: 18px;
+      margin-top: 10px;
       color: #999;
+      font-size: 18px;
       min-height: 24px;
     }
 
-    .cheat {
-      margin-top: 10px;
-      font-size: 14px;
-      color: #ffd966;
-      min-height: 20px;
+    .panel {
+      width: 220px;
+      background: #0d0d0d;
+      border: 1px solid #222;
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .panel h3 {
+      text-align: center;
+      color: #ccc;
+      margin-bottom: 12px;
+      font-size: 20px;
+    }
+
+    .topList {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .topList li {
+      background: #151515;
+      padding: 10px;
+      border-radius: 10px;
+      text-align: center;
+      color: #aaa;
     }
 
     @media (max-width: 768px) {
@@ -170,14 +146,9 @@
         align-items: center;
       }
 
-      .side-panel {
+      .panel {
         width: 100%;
         max-width: 420px;
-        order: 2;
-      }
-
-      .container {
-        order: 1;
       }
 
       .title {
@@ -187,16 +158,12 @@
       .result {
         font-size: 24px;
       }
-
-      .info {
-        font-size: 16px;
-      }
     }
   </style>
 </head>
 <body>
   <div class="wrapper">
-    <div class="container">
+    <div class="game">
       <div class="title">Sayıyı Bil</div>
 
       <div class="streaks">
@@ -204,128 +171,112 @@
         <div>Bilememe Streak: <span id="loseStreak">0</span> | En Yüksek: <span id="bestLoseStreak">0</span></div>
       </div>
 
-      <div class="input-group">
-        <input
-          type="text"
-          id="guessInput"
-          placeholder="0 - 100"
-          inputmode="numeric"
-          autocomplete="off"
-        />
-        <button id="guessBtn">Tahmin Et</button>
-      </div>
+      <input
+        type="text"
+        id="guessInput"
+        class="inputBox"
+        placeholder="0 - 100"
+        inputmode="numeric"
+        autocomplete="off"
+      />
+
+      <br>
+
+      <button id="guessBtn" class="btn">Tahmin Et</button>
 
       <div id="result" class="result"></div>
       <div id="info" class="info"></div>
-      <div id="cheatLabel" class="cheat"></div>
     </div>
 
-    <div class="side-panel">
-      <div class="side-title">En Çok Gelen 5 Sayı</div>
-      <ul class="top-list" id="topNumbersList">
+    <div class="panel">
+      <h3>En Çok Gelen 5 Sayı</h3>
+      <ul id="topList" class="topList">
         <li>Henüz veri yok</li>
       </ul>
     </div>
   </div>
 
   <script>
+    // Oyun verileri
     let winStreak = 0;
     let loseStreak = 0;
     let bestWinStreak = 0;
     let bestLoseStreak = 0;
-
-    
     let numberCounts = {};
-    let currentNumber = generateNumber();
 
-    const input = document.getElementById("guessInput");
-    const button = document.getElementById("guessBtn");
+    // Elementler
+    const guessInput = document.getElementById("guessInput");
+    const guessBtn = document.getElementById("guessBtn");
     const result = document.getElementById("result");
     const info = document.getElementById("info");
-    const cheatLabel = document.getElementById("cheatLabel");
-    const topNumbersList = document.getElementById("topNumbersList");
+    const topList = document.getElementById("topList");
 
-    function generateNumber() {
+    // İlk sayı
+    let currentNumber = createNumber();
+
+    function createNumber() {
       const num = Math.floor(Math.random() * 101);
 
-      if (!numberCounts[num]) {
+      if (numberCounts[num] === undefined) {
         numberCounts[num] = 0;
       }
-      numberCounts[num]++;
 
-      updateTopNumbers();
+      numberCounts[num]++;
+      updateTopList();
 
       return num;
     }
 
-    function updateTopNumbers() {
-      const sorted = Object.entries(numberCounts)
-        .sort((a, b) => b[1] - a[1])
-        .slice(0, 5);
+    function updateTopList() {
+      const entries = Object.entries(numberCounts);
 
-      topNumbersList.innerHTML = "";
-
-      if (sorted.length === 0) {
-        topNumbersList.innerHTML = "<li>Henüz veri yok</li>";
+      if (entries.length === 0) {
+        topList.innerHTML = "<li>Henüz veri yok</li>";
         return;
       }
 
-      sorted.forEach(([num, count], index) => {
-        const li = document.createElement("li");
-        li.textContent = `${index + 1}. ${num} (${count}x)`;
-        topNumbersList.appendChild(li);
+      entries.sort(function(a, b) {
+        return b[1] - a[1];
       });
+
+      const topFive = entries.slice(0, 5);
+
+      topList.innerHTML = "";
+
+      for (let i = 0; i < topFive.length; i++) {
+        const num = topFive[i][0];
+        const count = topFive[i][1];
+
+        const li = document.createElement("li");
+        li.textContent = (i + 1) + ". " + num + " (" + count + "x)";
+        topList.appendChild(li);
+      }
     }
 
-    function updateBestStreaks() {
-      if (winStreak > bestWinStreak) {
-        bestWinStreak = winStreak;
-      }
-
-      if (loseStreak > bestLoseStreak) {
-        bestLoseStreak = loseStreak;
-      }
-
+    function updateStreaks() {
+      document.getElementById("winStreak").textContent = winStreak;
+      document.getElementById("loseStreak").textContent = loseStreak;
       document.getElementById("bestWinStreak").textContent = bestWinStreak;
       document.getElementById("bestLoseStreak").textContent = bestLoseStreak;
     }
 
-    function updateCurrentStreaks() {
-      document.getElementById("winStreak").textContent = winStreak;
-      document.getElementById("loseStreak").textContent = loseStreak;
-    }
-
-    function checkGuess() {
-      const value = input.value.trim();
-
-      // Hile kodu
-      if (value === "0.01") {
-        cheatLabel.textContent = `🤫 Doğru sayı şu an: ${currentNumber}`;
-        result.textContent = "";
-        info.textContent = "";
-        input.value = "";
-        input.focus();
-        return;
-      }
+    function playGame() {
+      const value = guessInput.value.trim();
 
       // Sadece tam sayı kontrolü
       if (!/^\d+$/.test(value)) {
-        result.textContent = "Sadece 0 ile 100 arasında tam sayı gir!";
+        result.textContent = "0-100 arası tam sayı gir!";
         result.className = "result lose";
         info.textContent = "";
-        cheatLabel.textContent = "";
-        input.focus();
         return;
       }
 
-      const guess = Number(value);
+      const guess = parseInt(value, 10);
 
       if (guess < 0 || guess > 100) {
-        result.textContent = "0 ile 100 arasında bir sayı gir!";
+        result.textContent = "0-100 arası sayı gir!";
         result.className = "result lose";
         info.textContent = "";
-        cheatLabel.textContent = "";
-        input.focus();
         return;
       }
 
@@ -333,59 +284,43 @@
         winStreak++;
         loseStreak = 0;
 
+        if (winStreak > bestWinStreak) {
+          bestWinStreak = winStreak;
+        }
+
         result.textContent = "KAZANDIN!";
         result.className = "result win";
-        info.textContent = `Doğru sayı: ${currentNumber}`;
       } else {
         loseStreak++;
         winStreak = 0;
 
+        if (loseStreak > bestLoseStreak) {
+          bestLoseStreak = loseStreak;
+        }
+
         result.textContent = "KAYBETTİN!";
         result.className = "result lose";
-        info.textContent = `Doğru sayı: ${currentNumber}`;
       }
 
-      updateCurrentStreaks();
-      updateBestStreaks();
+      info.textContent = "Doğru sayı: " + currentNumber;
 
-      cheatLabel.textContent = "";
+      updateStreaks();
 
-      // Yeni tur için yeni sayı üret
-      currentNumber = generateNumber();
+      // Yeni tur
+      currentNumber = createNumber();
 
-      input.value = "";
-      setTimeout(() => input.focus(), 50);
+      guessInput.value = "";
     }
 
-    button.addEventListener("click", checkGuess);
+    guessBtn.addEventListener("click", playGame);
 
-    input.addEventListener("keydown", function(e) {
+    guessInput.addEventListener("keydown", function(e) {
       if (e.key === "Enter") {
-        checkGuess();
+        playGame();
       }
     });
 
-    input.addEventListener("input", function() {
-      // Hile kodu için nokta hariç normalde sadece sayı gibi davranacağız
-      // Ama 0.01 girebilmek için bunu çok sert filtrelemiyoruz
-      if (input.value.length > 5) {
-        input.value = input.value.slice(0, 5);
-      }
-    });
-
-    input.addEventListener("touchstart", function() {
-      input.focus();
-    });
-
-    window.addEventListener("load", () => {
-      updateCurrentStreaks();
-      updateBestStreaks();
-      updateTopNumbers();
-
-      setTimeout(() => {
-        input.focus();
-      }, 300);
-    });
+    updateStreaks();
   </script>
 </body>
 </html>
