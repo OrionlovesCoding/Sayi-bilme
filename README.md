@@ -1,3 +1,3 @@
 # Sayi-bilme
 Sayı tutturmaya çalış
-indeex.html
+indeeex.html
